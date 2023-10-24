@@ -1,12 +1,20 @@
-import React from "react";
-import './styles/board.css'
+import React, { useState } from "react";
+import './styles/board.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
-const Btn = ({values}) =>{
-// we map over the values array and create a button for each value.
+const Btn = () =>{
+const [buttonValues, setButtonValues] = useState(["", "", ""]);
+
+const handleClick=(index) =>{
+  const newbtnValues= [...buttonValues];
+  newbtnValues[index] = <FontAwesomeIcon icon={faClose} />;
+  setButtonValues(newbtnValues);
+}
   return (
     <div className="board-row">
-    {values.map((value, index) => (
-        <button key={index} className="square">{value}</button>
+    {buttonValues.map((value, index) => (
+        <button key={index} className="square" onClick={() => handleClick(index)}>{value}</button>
       ))}
     </div>
   )
